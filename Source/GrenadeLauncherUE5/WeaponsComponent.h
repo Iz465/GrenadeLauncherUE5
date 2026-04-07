@@ -7,6 +7,7 @@
 #include "WeaponsComponent.generated.h"
 
 class AWeapons;
+class AEnemyManager;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class GRENADELAUNCHERUE5_API UWeaponsComponent : public UActorComponent
@@ -27,6 +28,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	AWeapons* weapon;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	AEnemyManager* enemyManager = nullptr;
 
 	void StartFire();
 	void StopFire();

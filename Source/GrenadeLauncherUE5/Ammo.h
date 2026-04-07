@@ -9,6 +9,7 @@
 class UStaticMeshComponent;
 class UProjectileMovementComponent;
 class USphereComponent;
+class AWeapons;
 
 UCLASS()
 class GRENADELAUNCHERUE5_API AAmmo : public AActor
@@ -35,5 +36,8 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UProjectileMovementComponent* projectileMovement;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float ammoLeft;
 
 };

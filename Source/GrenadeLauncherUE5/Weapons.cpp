@@ -5,6 +5,10 @@
 #include "Components/StaticMeshComponent.h"
 #include "Components/BoxComponent.h"
 #include "Components/SceneComponent.h" 
+#include "Camera/CameraShakeBase.h"
+#include "Kismet/GameplayStatics.h"
+#include "GrenadeLauncherUE5Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
 AWeapons::AWeapons()
@@ -29,7 +33,10 @@ AWeapons::AWeapons()
 void AWeapons::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	ACharacter* playerCharacter = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
+	player = Cast<AGrenadeLauncherUE5Character>(playerCharacter);
+
 }
 
 // Called every frame
@@ -54,6 +61,7 @@ void AWeapons::StopFire()
 void AWeapons::Reload()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Emerald, TEXT("Reloading The Weapon"));
+	hasReloaded = true;
 }
 
 
@@ -64,3 +72,4 @@ void AWeapons::Aim()
 
 
 
+// if (APlayerController* PlayerController = Cast<APlayerController>(Controller))

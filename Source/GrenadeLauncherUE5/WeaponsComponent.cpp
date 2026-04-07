@@ -3,6 +3,8 @@
 
 #include "WeaponsComponent.h"
 #include "Weapons.h"
+#include"EnemyManager.h"
+#include "EngineUtils.h"
 
 // Sets default values for this component's properties
 UWeaponsComponent::UWeaponsComponent()
@@ -20,7 +22,12 @@ void UWeaponsComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
+
+	for (TActorIterator<AEnemyManager> i(GetWorld()); i; ++i)
+	{
+		enemyManager = *i;
+		break;
+	}
 	
 }
 

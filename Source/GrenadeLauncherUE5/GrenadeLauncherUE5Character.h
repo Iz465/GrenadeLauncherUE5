@@ -14,6 +14,7 @@ class UInputAction;
 class UInputMappingContext;
 struct FInputActionValue;
 class UWeaponsComponent;
+class ULifeComponent;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
@@ -23,8 +24,7 @@ class AGrenadeLauncherUE5Character : public ACharacter
 	GENERATED_BODY()
 
 	/** Pawn mesh: 1st person view (arms; seen only by self) */
-	UPROPERTY(VisibleDefaultsOnly, Category=Mesh)
-	USkeletalMeshComponent* Mesh1P;
+	
 
 	/** First person camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
@@ -53,10 +53,15 @@ class AGrenadeLauncherUE5Character : public ACharacter
 public:
 	AGrenadeLauncherUE5Character();
 
+
 protected:
 	virtual void BeginPlay();
+	virtual void Destroyed() override;
 
 public:
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Mesh)
+	USkeletalMeshComponent* Mesh1P;
 		
 	/** Look Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
@@ -94,6 +99,10 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UWeaponsComponent* weaponsComponent;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	ULifeComponent* lifeComponent;
+
+	
 
 private:
 	void Interact();

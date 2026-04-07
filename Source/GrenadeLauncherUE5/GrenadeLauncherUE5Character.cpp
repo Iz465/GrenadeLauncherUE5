@@ -12,6 +12,7 @@
 #include "Engine/LocalPlayer.h"
 #include "Weapons.h"
 #include "WeaponsComponent.h"
+#include "LifeComponent.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -21,6 +22,7 @@ DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 AGrenadeLauncherUE5Character::AGrenadeLauncherUE5Character()
 {
 	// Character doesnt have a rifle at start
+
 	bHasRifle = false;
 	
 	// Set size for collision capsule
@@ -42,8 +44,14 @@ AGrenadeLauncherUE5Character::AGrenadeLauncherUE5Character()
 	Mesh1P->SetRelativeLocation(FVector(-30.f, 0.f, -150.f));
 
 	weaponsComponent = CreateDefaultSubobject<UWeaponsComponent>(TEXT("WeaponsComponent"));
+	lifeComponent = CreateDefaultSubobject<ULifeComponent>(TEXT("LifeComponent"));
 
 }
+
+
+
+
+
 
 void AGrenadeLauncherUE5Character::BeginPlay()
 {
@@ -59,6 +67,12 @@ void AGrenadeLauncherUE5Character::BeginPlay()
 		}
 	}
 
+}
+
+void AGrenadeLauncherUE5Character::Destroyed()
+{
+	Super::Destroyed();
+	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Black, TEXT("Player has died!"));
 }
 
 //////////////////////////////////////////////////////////////////////////// Input

@@ -33,5 +33,11 @@ void AAmmo::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	/*
+	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Black, TEXT("Rotating Grenade"));
+	FRotator rotation = projectileMovement->Velocity.Rotation();
+	SetActorRotation(rotation);
+	*/
+
 }
 

@@ -9,7 +9,8 @@
 class UBoxComponent;
 class UStaticMeshComponent;
 class AAmmo;
-
+class UCameraShakeBase;
+class AGrenadeLauncherUE5Character;
 
 USTRUCT(BlueprintType)
 struct FWeaponInfo 
@@ -54,6 +55,8 @@ public:
 	virtual void StopFire();
 	virtual void Reload();
 	virtual void Aim();
+	UFUNCTION(BlueprintImplementableEvent)
+	void StartShake();
 
 
 
@@ -66,10 +69,14 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool hasFired = false;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool hasReloaded = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Ammo")
 	TSubclassOf<AAmmo> AmmoType;
 
-	
-
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "CameraShake")
+	TSubclassOf<UCameraShakeBase> cameraShake;
+	FTimerHandle reloadTimerHandle;
+	AGrenadeLauncherUE5Character* player;
 };
