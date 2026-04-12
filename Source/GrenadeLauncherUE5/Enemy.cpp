@@ -5,14 +5,22 @@
 #include "LifeComponent.h"
 #include "EnemyManager.h"
 #include "EngineUtils.h" // header need for TActorIterator
+#include "NavigationSystem.h"
+#include "NavigationPath.h"
+#include "GameFramework/Character.h"
+#include "AIController.h"
+#include "EnemyAIController.h"
 
 // Sets default values
 AEnemy::AEnemy()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	
 	lifeComponent = CreateDefaultSubobject<ULifeComponent>(TEXT("LifeComponent"));
+
+	AIControllerClass = AEnemyAIController::StaticClass();
+	AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
 
 }
 

@@ -9,6 +9,7 @@
 
 class ULifeComponent;
 class AEnemyManager;
+class UNavigationSystemV1;
 
 
 UCLASS()
@@ -19,6 +20,8 @@ class GRENADELAUNCHERUE5_API AEnemy : public ACharacter
 public:
 	// Sets default values for this character's properties
 	AEnemy();
+	
+
 
 protected:
 	// Called when the game starts or when spawned

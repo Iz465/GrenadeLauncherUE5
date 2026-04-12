@@ -20,7 +20,7 @@ AGrenadeWeapon::AGrenadeWeapon()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-	grenadeWeaponInfo.weaponInfo.reloadTime = 3;
+	grenadeWeaponInfo.weaponInfo.reloadTime = 1;
 	
 
 } 
@@ -44,6 +44,7 @@ void AGrenadeWeapon::Tick(float DeltaTime)
 void AGrenadeWeapon::StartFire()
 {
 	if (!hasReloaded) return;
+	if (grenadeWeaponInfo.weaponInfo.ammo <= 0) return;
 	if (player)
 		player->GetCharacterMovement()->MaxWalkSpeed = 0;
 
