@@ -42,8 +42,14 @@ void UWeaponsComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 
 void UWeaponsComponent::StartFire()
 {
+	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Emerald, TEXT("In start fire function"));
 	if (weapon)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Emerald, TEXT("Weapon is active"));
 		weapon->StartFire();
+	}
+	
+	else GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Emerald, TEXT("No Weapon"));
 }
 
 void UWeaponsComponent::StopFire()

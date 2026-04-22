@@ -44,7 +44,7 @@ void AGrenadeWeapon::Tick(float DeltaTime)
 void AGrenadeWeapon::StartFire()
 {
 	if (!hasReloaded) return;
-	if (grenadeWeaponInfo.weaponInfo.ammo <= 0) return;
+//	if (grenadeWeaponInfo.weaponInfo.ammo <= 0) return;
 	if (player)
 		player->GetCharacterMovement()->MaxWalkSpeed = 0;
 
@@ -55,7 +55,7 @@ void AGrenadeWeapon::StartFire()
 void AGrenadeWeapon::StopFire()
 {
 	if (!charging) return;
-	if (grenadeWeaponInfo.weaponInfo.ammo <= 0) return;
+	//if (grenadeWeaponInfo.weaponInfo.ammo <= 0) return;
 	if (!hasReloaded) return;
 
 	AAmmo* ammo = GetWorld()->SpawnActor<AAmmo>(AmmoType, aimArea->GetComponentLocation(), aimArea->GetComponentRotation());
