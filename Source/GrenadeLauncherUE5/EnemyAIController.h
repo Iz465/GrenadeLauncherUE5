@@ -9,6 +9,12 @@
 /**
  * 
  */
+
+class AEnemy;
+class UBehaviourTree;
+class UBlackboardComponent;
+
+
 UCLASS()
 class GRENADELAUNCHERUE5_API AEnemyAIController : public AAIController
 {
@@ -18,5 +24,17 @@ public:
 	AEnemyAIController();
 	virtual void Tick(float DeltaTime) override;
 	virtual void BeginPlay() override;
+	virtual void OnPossess(APawn* pawn) override;
+
+	AEnemy* enemy;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
+	UBehaviorTree* behaviorTreeAsset;
+
+	UPROPERTY()
+	UBlackboardComponent* BlackboardComponent;
+
+	void SetPlayerTarget();
+
+	
 
 };

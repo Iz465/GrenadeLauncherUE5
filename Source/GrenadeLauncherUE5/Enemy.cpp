@@ -19,7 +19,7 @@ AEnemy::AEnemy()
 	
 	lifeComponent = CreateDefaultSubobject<ULifeComponent>(TEXT("LifeComponent"));
 
-	AIControllerClass = AEnemyAIController::StaticClass();
+
 	AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
 
 }

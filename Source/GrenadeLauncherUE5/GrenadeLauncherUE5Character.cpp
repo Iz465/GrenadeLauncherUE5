@@ -143,7 +143,7 @@ bool AGrenadeLauncherUE5Character::GetHasRifle()
 void AGrenadeLauncherUE5Character::Interact()
 {
 
-
+	/*
 	if (!FirstPersonCameraComponent) return;
 	FVector startLocation = FirstPersonCameraComponent->GetComponentLocation();
 	FVector endLocation = (FirstPersonCameraComponent->GetForwardVector() * 500) + startLocation;
@@ -170,6 +170,7 @@ void AGrenadeLauncherUE5Character::Interact()
 	else
 		DrawDebugLine(GetWorld(), startLocation, endLocation, FColor::Red, true);
 
+	*/
 
 }
 

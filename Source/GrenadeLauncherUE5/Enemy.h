@@ -10,6 +10,7 @@
 class ULifeComponent;
 class AEnemyManager;
 class UNavigationSystemV1;
+class AAIController;
 
 
 UCLASS()
@@ -41,6 +42,10 @@ public:
 	AEnemyManager* enemyManager = nullptr;
 
 	virtual void Destroyed() override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy Values")
+	float attackDistance;
+
 	
 
 };
