@@ -5,7 +5,9 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "EPlayerState.h"
 #include "GrenadeLauncherUE5Character.generated.h"
+
 
 class UInputComponent;
 class USkeletalMeshComponent;
@@ -15,6 +17,7 @@ class UInputMappingContext;
 struct FInputActionValue;
 class UWeaponsComponent;
 class ULifeComponent;
+
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
@@ -102,6 +105,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	ULifeComponent* lifeComponent;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	EPlayerState ePlayerState = EPlayerState::Idle;
 	
 
 private:
