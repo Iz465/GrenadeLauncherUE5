@@ -21,6 +21,9 @@ DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
 AGrenadeLauncherUE5Character::AGrenadeLauncherUE5Character()
 {
+
+	PrimaryActorTick.bCanEverTick = true;
+
 	// Character doesnt have a rifle at start
 
 	bHasRifle = false;
@@ -48,7 +51,22 @@ AGrenadeLauncherUE5Character::AGrenadeLauncherUE5Character()
 
 }
 
+void AGrenadeLauncherUE5Character::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
 
+	switch (ePlayerState) // dont change the enum on tick if shooting/reloading
+	{
+	case (EPlayerState::Shoot): 
+	case (EPlayerState::Reload): 
+		return;
+	}
+
+	if (GetVelocity().Size() > 0)
+		ePlayerState = EPlayerState::Run;
+	else
+		ePlayerState = EPlayerState::Idle;
+}
 
 
 

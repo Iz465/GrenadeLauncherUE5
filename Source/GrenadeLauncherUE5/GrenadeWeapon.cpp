@@ -13,6 +13,7 @@
 #include "Camera/CameraShakeBase.h"
 #include "GrenadeLauncherUE5Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "EPlayerState.h"
 
 
 // Sets default values
@@ -44,48 +45,20 @@ void AGrenadeWeapon::Tick(float DeltaTime)
 void AGrenadeWeapon::StartFire()
 {
 	if (!hasReloaded) return;
-//	if (grenadeWeaponInfo.weaponInfo.ammo <= 0) return;
-	if (player)
-		player->GetCharacterMovement()->MaxWalkSpeed = 0;
 
-	charging = true;
+	if (!player) return;
+	
+
+	
+	AAmmo* ammo = GetWorld()->SpawnActor<AAmmo>(AmmoType, aimArea->GetComponentLocation(), player->GetControlRotation());
+	ammo->projectileMovement->Velocity = player->GetControlRotation().Vector() * 2000.f;
+	hasReloaded = false;
+	GetWorldTimerManager().SetTimer(reloadTimerHandle, this, &AGrenadeWeapon::Reload, 3, false);
+	player->ePlayerState = EPlayerState::Shoot;
 }
 
-
+// 	StartShake();
 void AGrenadeWeapon::StopFire()
 {
-	if (!charging) return;
-	//if (grenadeWeaponInfo.weaponInfo.ammo <= 0) return;
-	if (!hasReloaded) return;
-
-	AAmmo* ammo = GetWorld()->SpawnActor<AAmmo>(AmmoType, aimArea->GetComponentLocation(), aimArea->GetComponentRotation());
-	ammo->projectileMovement->Velocity = launchVelocity;
-
 	
-	
-
-	float launchLength = launchVelocity.Length();
-	float min = ammo->projectileMovement->InitialSpeed = launchLength;
-	float max = ammo->projectileMovement->MaxSpeed = launchLength;
-	
-	grenadeWeaponInfo.weaponInfo.ammo -= 1;
-	ammo->ammoLeft = grenadeWeaponInfo.weaponInfo.ammo;
-	
-
-	StartShake();
-	
-	charging = false;
-	hasFired = true;
-	grenadeWeaponInfo.distance = originalWeaponInfo.distance;
-	grenadeWeaponInfo.height = originalWeaponInfo.height;
-
-
-	hasReloaded = false;
-
-	GetWorldTimerManager().SetTimer(reloadTimerHandle, this, &AGrenadeWeapon::Reload, 3, false);
-
-
-	if (player)
-		player->GetCharacterMovement()->MaxWalkSpeed = 400;
-
 }

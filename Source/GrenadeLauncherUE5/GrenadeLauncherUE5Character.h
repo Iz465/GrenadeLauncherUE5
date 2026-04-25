@@ -113,6 +113,7 @@ private:
 	void Interact();
 	void StartFire();
 	void StopFire();
+	virtual void Tick(float DeltaTime) override;
 
 };
 
