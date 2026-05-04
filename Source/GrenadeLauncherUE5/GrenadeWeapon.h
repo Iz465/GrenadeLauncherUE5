@@ -45,6 +45,13 @@ public:
 
 	void StartFire() override;
 	void StopFire() override;
+	void Reload() override;
+	
+	UFUNCTION(BlueprintImplementableEvent)
+	void FireAnimation();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void ReloadAnimation();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool charging = false;
@@ -56,6 +63,10 @@ public:
 	FGrenadeWeaponInfo grenadeWeaponInfo;
 
 	FGrenadeWeaponInfo originalWeaponInfo;
+
+	
+
+
 
 
 

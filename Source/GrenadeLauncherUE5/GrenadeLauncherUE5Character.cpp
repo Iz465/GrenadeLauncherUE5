@@ -48,7 +48,7 @@ AGrenadeLauncherUE5Character::AGrenadeLauncherUE5Character()
 
 	weaponsComponent = CreateDefaultSubobject<UWeaponsComponent>(TEXT("WeaponsComponent"));
 	lifeComponent = CreateDefaultSubobject<ULifeComponent>(TEXT("LifeComponent"));
-
+	
 }
 
 void AGrenadeLauncherUE5Character::Tick(float DeltaTime)
