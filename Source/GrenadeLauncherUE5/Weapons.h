@@ -56,6 +56,7 @@ public:
 
 	virtual void StartFire();
 	virtual void StopFire();
+	UFUNCTION(BlueprintCallable)
 	virtual void Reload();
 	virtual void Aim();
 	virtual void ResetFireRate();
@@ -88,4 +89,10 @@ public:
 	AGrenadeLauncherUE5Character* player;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
 	UAnimMontage* weaponAnimationMontage;
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void FireAnimation();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void ReloadAnimation();
 };

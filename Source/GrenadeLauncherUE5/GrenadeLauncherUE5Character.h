@@ -52,6 +52,9 @@ class AGrenadeLauncherUE5Character : public ACharacter
 	// Fire Action
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* FireAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* ReloadAction;
 	
 public:
 	AGrenadeLauncherUE5Character();
@@ -113,6 +116,7 @@ private:
 	void Interact();
 	void StartFire();
 	void StopFire();
+	void Reload();
 	virtual void Tick(float DeltaTime) override;
 
 };

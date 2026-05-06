@@ -114,6 +114,8 @@ void AGrenadeLauncherUE5Character::SetupPlayerInputComponent(UInputComponent* Pl
 
 		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Started, this, &AGrenadeLauncherUE5Character::StartFire);
 		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Completed, this, &AGrenadeLauncherUE5Character::StopFire);
+
+		EnhancedInputComponent->BindAction(ReloadAction, ETriggerEvent::Started, this, &AGrenadeLauncherUE5Character::Reload);
 	}
 	else
 	{
@@ -195,6 +197,7 @@ void AGrenadeLauncherUE5Character::Interact()
 
 void AGrenadeLauncherUE5Character::StartFire() {	if (!weaponsComponent) return; weaponsComponent->StartFire(); }
 void AGrenadeLauncherUE5Character::StopFire() { if (!weaponsComponent) return; weaponsComponent->StopFire(); }
+void AGrenadeLauncherUE5Character::Reload() { if (!weaponsComponent) return;  weaponsComponent->Reload(); }
 
 
 

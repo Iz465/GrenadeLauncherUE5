@@ -79,7 +79,7 @@ void AGrenadeWeapon::StartFire()
 	{
 		hasReloaded = false;
 	
-		GetWorldTimerManager().SetTimer(reloadTimerHandle, this, &AGrenadeWeapon::Reload, 3, false);
+		//GetWorldTimerManager().SetTimer(reloadTimerHandle, this, &AGrenadeWeapon::Reload, 3, false);
 		ReloadAnimation();
 	//	AnimInstance->Montage_Play(weaponAnimationMontage);
 	//	AnimInstance->Montage_JumpToSection(FName("Reload"), weaponAnimationMontage);
@@ -101,7 +101,6 @@ void AGrenadeWeapon::StopFire()
 void AGrenadeWeapon::Reload()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Black, TEXT("Reloading grenade launcher"));
-	grenadeWeaponInfo.weaponInfo.ammo = 5;
 	hasReloaded = true;
 	hasFiredRate = false;
 }

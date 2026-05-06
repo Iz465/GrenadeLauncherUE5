@@ -57,3 +57,9 @@ void UWeaponsComponent::StopFire()
 	if (weapon)
 		weapon->StopFire();
 }
+
+void UWeaponsComponent::Reload()
+{
+	if (weapon)
+		weapon->ReloadAnimation();
+}
