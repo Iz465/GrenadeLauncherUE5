@@ -47,7 +47,7 @@ void ULifeComponent::TakeDamage(float damage)
 
 void ULifeComponent::Death()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Black, TEXT("DEATH HAS COME"));
+	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Black, TEXT("DEATH HAS COME HEHEHE"));
 	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Black, GetOwner()->GetName());
 	GetOwner()->Destroy();
 }
