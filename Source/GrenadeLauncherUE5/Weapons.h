@@ -59,6 +59,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	virtual void Reload();
 	virtual void Aim();
+	UFUNCTION(BlueprintCallable)
 	virtual void ResetFireRate();
 	UFUNCTION(BlueprintImplementableEvent)
 	void StartShake();
@@ -95,4 +96,10 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void ReloadAnimation();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FWeaponInfo weaponInfo;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FWeaponInfo originalWeaponInfo;
 };

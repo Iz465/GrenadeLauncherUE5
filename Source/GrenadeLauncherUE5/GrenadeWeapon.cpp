@@ -22,8 +22,8 @@ AGrenadeWeapon::AGrenadeWeapon()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-	grenadeWeaponInfo.weaponInfo.reloadTime = 1;
-	
+	weaponInfo.reloadTime = 1;
+	weaponInfo.ammo = 5;
 
 } 
 
@@ -64,8 +64,8 @@ void AGrenadeWeapon::StartFire()
 
 	
 	hasFiredRate = true;
-	GetWorldTimerManager().SetTimer(reloadTimerHandle, this, &AGrenadeWeapon::ResetFireRate, grenadeWeaponInfo.weaponInfo.fireRate, false);
-	
+	GetWorldTimerManager().SetTimer(reloadTimerHandle, this, &AGrenadeWeapon::ResetFireRate, weaponInfo.fireRate, false);
+	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Black, TEXT("Fired"));
 
 	
 	
@@ -73,9 +73,9 @@ void AGrenadeWeapon::StartFire()
 	AAmmo* ammo = GetWorld()->SpawnActor<AAmmo>(AmmoType, aimArea->GetComponentLocation(), player->GetControlRotation());
 	ammo->projectileMovement->Velocity = player->GetControlRotation().Vector() * 2000.f;
 
-	grenadeWeaponInfo.weaponInfo.ammo -= 1;
-	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Black, FString::SanitizeFloat(grenadeWeaponInfo.weaponInfo.ammo));
-	if ((grenadeWeaponInfo.weaponInfo.ammo) == 0)		
+	weaponInfo.ammo -= 1;
+	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Black, FString::SanitizeFloat(weaponInfo.ammo));
+	if ((weaponInfo.ammo) == 0)		
 	{
 		hasReloaded = false;
 	

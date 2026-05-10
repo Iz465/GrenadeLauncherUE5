@@ -11,8 +11,7 @@ USTRUCT(BlueprintType)
 struct FGrenadeWeaponInfo 
 {
 	GENERATED_BODY()
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FWeaponInfo weaponInfo;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float height = 171;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

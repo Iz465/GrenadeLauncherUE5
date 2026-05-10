@@ -29,11 +29,11 @@ void AEnemyManager::Tick(float DeltaTime)
 void AEnemyManager::AddEnemy(AEnemy* enemy)
 {
 	aliveEnemies.Add(enemy);
-	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Black, FString::Printf(TEXT("Enemy Added. Enemy Amount: %d"), aliveEnemies.Num()));
+	//GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Black, FString::Printf(TEXT("Enemy Added. Enemy Amount: %d"), aliveEnemies.Num()));
 }
 
 void AEnemyManager::RemoveEnemy(AEnemy* enemy)
 {
 	aliveEnemies.Remove(enemy);
-	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Black, FString::Printf(TEXT("Enemy Removed. Enemy Amount: %d"), aliveEnemies.Num()));
+	//GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Black, FString::Printf(TEXT("Enemy Removed. Enemy Amount: %d"), aliveEnemies.Num()));
 }
