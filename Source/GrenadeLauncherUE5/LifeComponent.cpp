@@ -39,9 +39,6 @@ void ULifeComponent::TakeDamage(float damage)
 	lifeStruct.health -= damage;
 	if (lifeStruct.health <= 0)
 		Death();
-	
-		
-	
 		
 }
 

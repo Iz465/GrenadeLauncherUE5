@@ -47,17 +47,8 @@ public:
 	float attackDistance;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Body Parts")
-	TSubclassOf<AActor> head;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Body Parts")
-	TSubclassOf<AActor> torso;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Body Parts")
-	TSubclassOf<AActor> leftArm;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Body Parts")
-	TSubclassOf<AActor> leftLeg;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Body Parts")
-	TSubclassOf<AActor> rightArm;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Body Parts")
-	TSubclassOf<AActor> rightLeg;
+	TArray<UStaticMesh*> bodyParts;
+	
 
 	
 
