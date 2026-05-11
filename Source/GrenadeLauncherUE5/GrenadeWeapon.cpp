@@ -39,8 +39,6 @@ void AGrenadeWeapon::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	
-
 }
 
 void AGrenadeWeapon::StartFire()
@@ -51,30 +49,15 @@ void AGrenadeWeapon::StartFire()
 
 	if (!player) return;
 
-//	AGrenadeLauncherUE5Character* grenadePlayer = Cast<AGrenadeLauncherUE5Character>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
-//	if (!player) return;
-	
-//	UAnimInstance* AnimInstance = grenadePlayer->GetMesh1P()->GetAnimInstance();
-//	if (!AnimInstance) return;
-//	AnimInstance->Montage_Play(weaponAnimationMontage);
-	//AnimInstance->Montage_JumpToSection(FName("Shoot"), weaponAnimationMontage);
-
-
 	FireAnimation();
 
-	
 	hasFiredRate = true;
 	GetWorldTimerManager().SetTimer(reloadTimerHandle, this, &AGrenadeWeapon::ResetFireRate, weaponInfo.fireRate, false);
-	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Black, TEXT("Fired"));
 
-	
-	
-	
 	AAmmo* ammo = GetWorld()->SpawnActor<AAmmo>(AmmoType, aimArea->GetComponentLocation(), player->GetControlRotation());
 	ammo->projectileMovement->Velocity = player->GetControlRotation().Vector() * 2000.f;
-
 	weaponInfo.ammo -= 1;
-	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Black, FString::SanitizeFloat(weaponInfo.ammo));
+
 	if ((weaponInfo.ammo) == 0)		
 	{
 		hasReloaded = false;
@@ -86,10 +69,6 @@ void AGrenadeWeapon::StartFire()
 		
 	}
 
-	
-		
-
-	
 }
 
 // 	StartShake();
