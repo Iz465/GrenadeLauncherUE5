@@ -58,6 +58,8 @@ void AGrenadeWeapon::StartFire()
 	ammo->projectileMovement->Velocity = player->GetControlRotation().Vector() * 2000.f;
 	weaponInfo.ammo -= 1;
 
+	StartShake();
+
 	if ((weaponInfo.ammo) == 0)		
 	{
 		hasReloaded = false;
@@ -71,7 +73,7 @@ void AGrenadeWeapon::StartFire()
 
 }
 
-// 	StartShake();
+	
 void AGrenadeWeapon::StopFire()
 {
 	

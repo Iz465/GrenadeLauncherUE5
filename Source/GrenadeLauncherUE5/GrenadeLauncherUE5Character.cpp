@@ -112,7 +112,7 @@ void AGrenadeLauncherUE5Character::SetupPlayerInputComponent(UInputComponent* Pl
 
 		EnhancedInputComponent->BindAction(InteractAction, ETriggerEvent::Started, this, &AGrenadeLauncherUE5Character::Interact);
 
-		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Started, this, &AGrenadeLauncherUE5Character::StartFire);
+		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Triggered, this, &AGrenadeLauncherUE5Character::StartFire);
 		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Completed, this, &AGrenadeLauncherUE5Character::StopFire);
 
 		EnhancedInputComponent->BindAction(ReloadAction, ETriggerEvent::Started, this, &AGrenadeLauncherUE5Character::Reload);

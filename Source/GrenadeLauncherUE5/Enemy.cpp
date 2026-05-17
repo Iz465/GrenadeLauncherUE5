@@ -60,10 +60,11 @@ void AEnemy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
+/*
 void AEnemy::Destroyed()
 {
 	if(!enemyManager) return;
 	enemyManager->RemoveEnemy(this);
-	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Red, TEXT("Destruction of enemy"));
-}
 
+}
+*/
