@@ -39,15 +39,12 @@ void ULifeComponent::TakeDamage(float damage)
 	lifeStruct.health -= damage;
 	if (lifeStruct.health <= 0)
 		Death();
-	
-		
-	
 		
 }
 
 void ULifeComponent::Death()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Black, TEXT("DEATH HAS COME"));
+	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Black, TEXT("DEATH HAS COME HEHEHE"));
 	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Black, GetOwner()->GetName());
 	GetOwner()->Destroy();
 }

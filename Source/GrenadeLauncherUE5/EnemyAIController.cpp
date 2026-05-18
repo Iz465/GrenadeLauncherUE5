@@ -23,8 +23,6 @@ void AEnemyAIController::OnPossess(APawn* pawn)
 {
     Super::OnPossess(pawn);
 
-
-
     if (behaviorTreeAsset)
     {
         UseBlackboard(behaviorTreeAsset->BlackboardAsset, BlackboardComponent);
@@ -53,11 +51,7 @@ void AEnemyAIController::SetPlayerTarget()
 {
     APawn* playerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
     
-        GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Black, TEXT("Blackboard info stored!"));
         BlackboardComponent->SetValueAsObject("PlayerTarget", playerPawn);
-    
-
-
 }
 
 

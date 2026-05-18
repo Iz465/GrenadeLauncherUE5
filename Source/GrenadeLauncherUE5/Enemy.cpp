@@ -60,9 +60,11 @@ void AEnemy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
+/*
 void AEnemy::Destroyed()
 {
 	if(!enemyManager) return;
 	enemyManager->RemoveEnemy(this);
-}
 
+}
+*/

@@ -9,6 +9,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "GrenadeLauncherUE5Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Animation/AnimMontage.h"
 
 // Sets default values
 AWeapons::AWeapons()
@@ -64,6 +65,10 @@ void AWeapons::Reload()
 	hasReloaded = true;
 }
 
+void AWeapons::ResetFireRate()
+{
+	hasFiredRate = false;
+}
 
 void AWeapons::Aim()
 {

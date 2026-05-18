@@ -13,15 +13,17 @@
 #include "Camera/CameraShakeBase.h"
 #include "GrenadeLauncherUE5Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
-
+#include "EPlayerState.h"
+#include "Animation/AnimMontage.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AGrenadeWeapon::AGrenadeWeapon()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-	grenadeWeaponInfo.weaponInfo.reloadTime = 1;
-	
+	weaponInfo.reloadTime = 1;
+	weaponInfo.ammo = 5;
 
 } 
 
@@ -37,55 +39,49 @@ void AGrenadeWeapon::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	
-
 }
 
 void AGrenadeWeapon::StartFire()
 {
-	if (!hasReloaded) return;
-//	if (grenadeWeaponInfo.weaponInfo.ammo <= 0) return;
-	if (player)
-		player->GetCharacterMovement()->MaxWalkSpeed = 0;
+	if (hasFiredRate) return;
 
-	charging = true;
-}
-
-
-void AGrenadeWeapon::StopFire()
-{
-	if (!charging) return;
-	//if (grenadeWeaponInfo.weaponInfo.ammo <= 0) return;
 	if (!hasReloaded) return;
 
-	AAmmo* ammo = GetWorld()->SpawnActor<AAmmo>(AmmoType, aimArea->GetComponentLocation(), aimArea->GetComponentRotation());
-	ammo->projectileMovement->Velocity = launchVelocity;
+	if (!player) return;
 
-	
-	
+	FireAnimation();
 
-	float launchLength = launchVelocity.Length();
-	float min = ammo->projectileMovement->InitialSpeed = launchLength;
-	float max = ammo->projectileMovement->MaxSpeed = launchLength;
-	
-	grenadeWeaponInfo.weaponInfo.ammo -= 1;
-	ammo->ammoLeft = grenadeWeaponInfo.weaponInfo.ammo;
-	
+	hasFiredRate = true;
+	GetWorldTimerManager().SetTimer(reloadTimerHandle, this, &AGrenadeWeapon::ResetFireRate, weaponInfo.fireRate, false);
+
+	AAmmo* ammo = GetWorld()->SpawnActor<AAmmo>(AmmoType, aimArea->GetComponentLocation(), player->GetControlRotation());
+	ammo->projectileMovement->Velocity = player->GetControlRotation().Vector() * 2000.f;
+	weaponInfo.ammo -= 1;
 
 	StartShake();
+
+	if ((weaponInfo.ammo) == 0)		
+	{
+		hasReloaded = false;
 	
-	charging = false;
-	hasFired = true;
-	grenadeWeaponInfo.distance = originalWeaponInfo.distance;
-	grenadeWeaponInfo.height = originalWeaponInfo.height;
+		//GetWorldTimerManager().SetTimer(reloadTimerHandle, this, &AGrenadeWeapon::Reload, 3, false);
+		ReloadAnimation();
+	//	AnimInstance->Montage_Play(weaponAnimationMontage);
+	//	AnimInstance->Montage_JumpToSection(FName("Reload"), weaponAnimationMontage);
+		
+	}
 
+}
 
-	hasReloaded = false;
+	
+void AGrenadeWeapon::StopFire()
+{
+	
+}
 
-	GetWorldTimerManager().SetTimer(reloadTimerHandle, this, &AGrenadeWeapon::Reload, 3, false);
-
-
-	if (player)
-		player->GetCharacterMovement()->MaxWalkSpeed = 400;
-
+void AGrenadeWeapon::Reload()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Black, TEXT("Reloading grenade launcher"));
+	hasReloaded = true;
+	hasFiredRate = false;
 }

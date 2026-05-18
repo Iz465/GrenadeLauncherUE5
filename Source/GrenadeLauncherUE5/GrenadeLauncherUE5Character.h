@@ -5,7 +5,9 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "EPlayerState.h"
 #include "GrenadeLauncherUE5Character.generated.h"
+
 
 class UInputComponent;
 class USkeletalMeshComponent;
@@ -15,6 +17,7 @@ class UInputMappingContext;
 struct FInputActionValue;
 class UWeaponsComponent;
 class ULifeComponent;
+
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
@@ -49,6 +52,9 @@ class AGrenadeLauncherUE5Character : public ACharacter
 	// Fire Action
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* FireAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* ReloadAction;
 	
 public:
 	AGrenadeLauncherUE5Character();
@@ -102,12 +108,16 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	ULifeComponent* lifeComponent;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	EPlayerState ePlayerState = EPlayerState::Idle;
 	
 
 private:
 	void Interact();
 	void StartFire();
 	void StopFire();
+	void Reload();
+	virtual void Tick(float DeltaTime) override;
 
 };
 

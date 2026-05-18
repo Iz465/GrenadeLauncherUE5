@@ -41,10 +41,14 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	AEnemyManager* enemyManager = nullptr;
 
-	virtual void Destroyed() override;
+	//virtual void Destroyed() override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy Values")
 	float attackDistance;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Body Parts")
+	TArray<UStaticMesh*> bodyParts;
+	
 
 	
 

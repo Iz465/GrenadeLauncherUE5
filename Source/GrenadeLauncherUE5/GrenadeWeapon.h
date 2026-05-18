@@ -11,8 +11,7 @@ USTRUCT(BlueprintType)
 struct FGrenadeWeaponInfo 
 {
 	GENERATED_BODY()
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FWeaponInfo weaponInfo;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float height = 171;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -45,6 +44,9 @@ public:
 
 	void StartFire() override;
 	void StopFire() override;
+	void Reload() override;
+	
+
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool charging = false;
@@ -56,6 +58,10 @@ public:
 	FGrenadeWeaponInfo grenadeWeaponInfo;
 
 	FGrenadeWeaponInfo originalWeaponInfo;
+
+	
+
+
 
 
 

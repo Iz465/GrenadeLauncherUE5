@@ -21,6 +21,9 @@ DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
 AGrenadeLauncherUE5Character::AGrenadeLauncherUE5Character()
 {
+
+	PrimaryActorTick.bCanEverTick = true;
+
 	// Character doesnt have a rifle at start
 
 	bHasRifle = false;
@@ -45,10 +48,25 @@ AGrenadeLauncherUE5Character::AGrenadeLauncherUE5Character()
 
 	weaponsComponent = CreateDefaultSubobject<UWeaponsComponent>(TEXT("WeaponsComponent"));
 	lifeComponent = CreateDefaultSubobject<ULifeComponent>(TEXT("LifeComponent"));
-
+	
 }
 
+void AGrenadeLauncherUE5Character::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
 
+	switch (ePlayerState) // dont change the enum on tick if shooting/reloading
+	{
+	case (EPlayerState::Shoot): 
+	case (EPlayerState::Reload): 
+		return;
+	}
+
+	if (GetVelocity().Size() > 0)
+		ePlayerState = EPlayerState::Run;
+	else
+		ePlayerState = EPlayerState::Idle;
+}
 
 
 
@@ -94,8 +112,10 @@ void AGrenadeLauncherUE5Character::SetupPlayerInputComponent(UInputComponent* Pl
 
 		EnhancedInputComponent->BindAction(InteractAction, ETriggerEvent::Started, this, &AGrenadeLauncherUE5Character::Interact);
 
-		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Started, this, &AGrenadeLauncherUE5Character::StartFire);
+		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Triggered, this, &AGrenadeLauncherUE5Character::StartFire);
 		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Completed, this, &AGrenadeLauncherUE5Character::StopFire);
+
+		EnhancedInputComponent->BindAction(ReloadAction, ETriggerEvent::Started, this, &AGrenadeLauncherUE5Character::Reload);
 	}
 	else
 	{
@@ -177,6 +197,7 @@ void AGrenadeLauncherUE5Character::Interact()
 
 void AGrenadeLauncherUE5Character::StartFire() {	if (!weaponsComponent) return; weaponsComponent->StartFire(); }
 void AGrenadeLauncherUE5Character::StopFire() { if (!weaponsComponent) return; weaponsComponent->StopFire(); }
+void AGrenadeLauncherUE5Character::Reload() { if (!weaponsComponent) return;  weaponsComponent->Reload(); }
 
 
 

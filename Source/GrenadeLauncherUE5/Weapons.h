@@ -11,6 +11,7 @@ class UStaticMeshComponent;
 class AAmmo;
 class UCameraShakeBase;
 class AGrenadeLauncherUE5Character;
+class UAnimMontage;
 
 USTRUCT(BlueprintType)
 struct FWeaponInfo 
@@ -25,6 +26,8 @@ struct FWeaponInfo
 	int ammo;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float reloadTime;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float fireRate;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FVector location = FVector(-30.06, 8.3814, -6.020); // red, green, blue.  x , y , z
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -53,8 +56,11 @@ public:
 
 	virtual void StartFire();
 	virtual void StopFire();
+	UFUNCTION(BlueprintCallable)
 	virtual void Reload();
 	virtual void Aim();
+	UFUNCTION(BlueprintCallable)
+	virtual void ResetFireRate();
 	UFUNCTION(BlueprintImplementableEvent)
 	void StartShake();
 
@@ -72,6 +78,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool hasReloaded = true;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool hasFiredRate = false;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Ammo")
 	TSubclassOf<AAmmo> AmmoType;
 
@@ -79,4 +88,18 @@ public:
 	TSubclassOf<UCameraShakeBase> cameraShake;
 	FTimerHandle reloadTimerHandle;
 	AGrenadeLauncherUE5Character* player;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
+	UAnimMontage* weaponAnimationMontage;
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void FireAnimation();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void ReloadAnimation();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FWeaponInfo weaponInfo;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FWeaponInfo originalWeaponInfo;
 };

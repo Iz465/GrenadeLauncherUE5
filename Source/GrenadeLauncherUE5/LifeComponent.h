@@ -15,6 +15,8 @@ struct FLifeStruct
 	float health = 100;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float damage = 10;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float maxHealth = health;
 };
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
