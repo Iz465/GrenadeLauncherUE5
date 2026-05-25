@@ -105,5 +105,5 @@ public:
 	FWeaponInfo originalWeaponInfo;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Tags")
-	TArray<FGameplayTagContainer> weaponTags;
+	TArray<FGameplayTag> weaponTags;
 };
