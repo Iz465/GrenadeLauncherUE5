@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "GameplayTagContainer.h"
 #include "Weapons.generated.h"
 
 class UBoxComponent;
@@ -102,4 +103,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FWeaponInfo originalWeaponInfo;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Tags")
+	TArray<FGameplayTagContainer> weaponTags;
 };
