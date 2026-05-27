@@ -106,4 +106,8 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Tags")
 	TArray<FGameplayTag> weaponTags;
+
+//	UFUNCTION(BlueprintImplementableEvent)
+	//void ActivatePerk(FGameplayTag perk);
+
 };
