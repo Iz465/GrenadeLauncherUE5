@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "GameplayTagContainer.h"
+#include "Struct_Perks.h"
 #include "Weapons.generated.h"
 
 class UBoxComponent;
@@ -107,7 +108,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Tags")
 	TArray<FGameplayTag> weaponTags;
 
-//	UFUNCTION(BlueprintImplementableEvent)
-	//void ActivatePerk(FGameplayTag perk);
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	void ActivatePerk(FPerks fperks);
 
 };

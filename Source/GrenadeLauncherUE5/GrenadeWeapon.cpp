@@ -76,7 +76,7 @@ void AGrenadeWeapon::StartFire()
 	
 void AGrenadeWeapon::StopFire()
 {
-	
+
 }
 
 void AGrenadeWeapon::Reload()
