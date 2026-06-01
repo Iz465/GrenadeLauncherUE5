@@ -58,6 +58,11 @@ void AGrenadeWeapon::StartFire()
 	ammo->projectileMovement->Velocity = player->GetControlRotation().Vector() * 2000.f;
 	weaponInfo.ammo -= 1;
 
+	ammo->weapon = this;
+
+	
+
+
 	StartShake();
 
 	if ((weaponInfo.ammo) == 0)		

@@ -15,6 +15,8 @@ UCLASS()
 class GRENADELAUNCHERUE5_API AAmmo : public AActor
 {
 	GENERATED_BODY()
+
+
 	
 public:	
 	// Sets default values for this actor's properties
@@ -39,5 +41,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float ammoLeft;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	AWeapons* weapon;
+
 
 };
