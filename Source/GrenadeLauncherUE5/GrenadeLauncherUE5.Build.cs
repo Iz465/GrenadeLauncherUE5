@@ -16,7 +16,8 @@ public class GrenadeLauncherUE5 : ModuleRules
 		"InputCore", 
 		"EnhancedInput", 
 		"NavigationSystem", 
-		"AIModule" 
+		"AIModule",
+		"GameplayTags"
 		});
 	}
 }
