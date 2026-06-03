@@ -24,6 +24,7 @@ AGrenadeWeapon::AGrenadeWeapon()
 	PrimaryActorTick.bCanEverTick = false;
 	weaponInfo.reloadTime = 1;
 	weaponInfo.ammo = 5;
+	
 
 } 
 
@@ -89,4 +90,5 @@ void AGrenadeWeapon::Reload()
 	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Black, TEXT("Reloading grenade launcher"));
 	hasReloaded = true;
 	hasFiredRate = false;
+
 }

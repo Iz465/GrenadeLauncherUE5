@@ -9,6 +9,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "GrenadeLauncherUE5Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "FPS_GameInstance.h"
 #include "Animation/AnimMontage.h"
 
 // Sets default values
@@ -37,6 +38,15 @@ void AWeapons::BeginPlay()
 
 	ACharacter* playerCharacter = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
 	player = Cast<AGrenadeLauncherUE5Character>(playerCharacter);
+
+	UFPS_GameInstance* gameInstance = Cast<UFPS_GameInstance>(UGameplayStatics::GetGameInstance(this));
+	if (!gameInstance) return;
+	weaponInfo.damage = gameInstance->savedWeaponInfo.damage;
+	weaponInfo.ammo = gameInstance->savedWeaponInfo.ammo;
+	weaponInfo.reloadTime = gameInstance->savedWeaponInfo.reloadTime;
+	weaponInfo.fireRate = gameInstance->savedWeaponInfo.fireRate;
+
+
 
 }
 
