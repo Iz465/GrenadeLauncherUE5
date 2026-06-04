@@ -11,6 +11,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "FPS_GameInstance.h"
 #include "Animation/AnimMontage.h"
+#include "Camera/CameraComponent.h"   
 
 // Sets default values
 AWeapons::AWeapons()
@@ -43,7 +44,7 @@ void AWeapons::BeginPlay()
 	ACharacter* playerCharacter = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
 	player = Cast<AGrenadeLauncherUE5Character>(playerCharacter);
 
-	UFPS_GameInstance* gameInstance = Cast<UFPS_GameInstance>(UGameplayStatics::GetGameInstance(this));
+	gameInstance = Cast<UFPS_GameInstance>(UGameplayStatics::GetGameInstance(this));
 	if (gameInstance)
 	{
 		weaponInfo.damage = gameInstance->savedWeaponInfo.damage;
@@ -63,20 +64,17 @@ void AWeapons::BeginPlay()
 void AWeapons::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	UFPS_GameInstance* gameInstance = Cast<UFPS_GameInstance>(UGameplayStatics::GetGameInstance(this));
-	if (gameInstance)
-	{
-		GEngine->AddOnScreenDebugMessage(1, 5, FColor::Red, TEXT("Game Instance finally found"));
-	}
-
-	else
-		GEngine->AddOnScreenDebugMessage(1, 5, FColor::Red, TEXT("Game Instance not found"));
+	
 }
 
 void AWeapons::StartFire()
 {
 
 	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Emerald, TEXT("Weapon Fired"));
+
+	if (!player) return;
+	
+	player->GetMesh1P()->GetAnimInstance()->Montage_Play(weaponAnimationMontage, 1);
 }
 
 void AWeapons::StopFire()
@@ -84,6 +82,8 @@ void AWeapons::StopFire()
 
 	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Emerald, TEXT("Firing Cancelled"));
 }
+
+
 
 void AWeapons::Reload()
 {
@@ -101,6 +101,11 @@ void AWeapons::Aim()
 	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Emerald, TEXT("Aiming The Weapon"));
 }
 
+void AWeapons::StartShake()
+{
+	FVector shakeLocation = player->GetFirstPersonCameraComponent()->GetComponentLocation();
+	UGameplayStatics::PlayWorldCameraShake(GetWorld(), cameraShake, shakeLocation, 50, 50, 1);
+} 
 
 
-// if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
+

@@ -3,7 +3,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Weapons.h"
 #include "Struct_Weapons.generated.h"
+
+
 
 class UTexture2D;
 
@@ -24,4 +27,10 @@ struct FSavedWeaponInfo : public FTableRowBase
 	float fireRate;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UTexture2D* image;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TSubclassOf<AWeapons> weapon;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FVector location;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FRotator rotation;
 };

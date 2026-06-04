@@ -50,7 +50,7 @@ void AGrenadeWeapon::StartFire()
 
 	if (!player) return;
 
-	FireAnimation();
+	//FireAnimation();
 
 	hasFiredRate = true;
 	GetWorldTimerManager().SetTimer(reloadTimerHandle, this, &AGrenadeWeapon::ResetFireRate, weaponInfo.fireRate, false);
@@ -92,3 +92,4 @@ void AGrenadeWeapon::Reload()
 	hasFiredRate = false;
 
 }
+
