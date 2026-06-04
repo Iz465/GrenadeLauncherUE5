@@ -16,7 +16,7 @@ class GRENADELAUNCHERUE5_API UFPS_GameInstance : public UGameInstance
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this actor's properties
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FSavedWeaponInfo savedWeaponInfo;
 
 protected:

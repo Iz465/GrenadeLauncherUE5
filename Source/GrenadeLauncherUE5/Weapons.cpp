@@ -17,6 +17,8 @@ AWeapons::AWeapons()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bStartWithTickEnabled = true;
+	SetActorTickEnabled(true);
 
 	USceneComponent* Root = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
 	RootComponent = Root;
@@ -35,18 +37,25 @@ AWeapons::AWeapons()
 void AWeapons::BeginPlay()
 {
 	Super::BeginPlay();
-
+	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bStartWithTickEnabled = true;
+	SetActorTickEnabled(true);
 	ACharacter* playerCharacter = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
 	player = Cast<AGrenadeLauncherUE5Character>(playerCharacter);
 
 	UFPS_GameInstance* gameInstance = Cast<UFPS_GameInstance>(UGameplayStatics::GetGameInstance(this));
-	if (!gameInstance) return;
-	weaponInfo.damage = gameInstance->savedWeaponInfo.damage;
-	weaponInfo.ammo = gameInstance->savedWeaponInfo.ammo;
-	weaponInfo.reloadTime = gameInstance->savedWeaponInfo.reloadTime;
-	weaponInfo.fireRate = gameInstance->savedWeaponInfo.fireRate;
+	if (gameInstance)
+	{
+		weaponInfo.damage = gameInstance->savedWeaponInfo.damage;
+		weaponInfo.ammo = gameInstance->savedWeaponInfo.ammo;
+		weaponInfo.reloadTime = gameInstance->savedWeaponInfo.reloadTime;
+		weaponInfo.fireRate = gameInstance->savedWeaponInfo.fireRate;
 
+		GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Blue, FString::SanitizeFloat(gameInstance->savedWeaponInfo.damage));
+	}
 
+	else
+		GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Blue, TEXT("Game Instance not found"));
 
 }
 
@@ -54,7 +63,14 @@ void AWeapons::BeginPlay()
 void AWeapons::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	UFPS_GameInstance* gameInstance = Cast<UFPS_GameInstance>(UGameplayStatics::GetGameInstance(this));
+	if (gameInstance)
+	{
+		GEngine->AddOnScreenDebugMessage(1, 5, FColor::Red, TEXT("Game Instance finally found"));
+	}
 
+	else
+		GEngine->AddOnScreenDebugMessage(1, 5, FColor::Red, TEXT("Game Instance not found"));
 }
 
 void AWeapons::StartFire()
