@@ -14,6 +14,7 @@ class AAmmo;
 class UCameraShakeBase;
 class AGrenadeLauncherUE5Character;
 class UAnimMontage;
+class UFPS_GameInstance;
 
 USTRUCT(BlueprintType)
 struct FWeaponInfo 
@@ -63,7 +64,7 @@ public:
 	virtual void Aim();
 	UFUNCTION(BlueprintCallable)
 	virtual void ResetFireRate();
-	UFUNCTION(BlueprintImplementableEvent)
+	UFUNCTION(BlueprintCallable)
 	void StartShake();
 
 
@@ -89,12 +90,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "CameraShake")
 	TSubclassOf<UCameraShakeBase> cameraShake;
 	FTimerHandle reloadTimerHandle;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	AGrenadeLauncherUE5Character* player;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
 	UAnimMontage* weaponAnimationMontage;
 
-	UFUNCTION(BlueprintImplementableEvent)
-	void FireAnimation();
+	//UFUNCTION(BlueprintCallable)
+	//void FireAnimation();
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void ReloadAnimation();
@@ -110,5 +112,12 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
 	void ActivatePerk(FPerks fperks);
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UFPS_GameInstance* gameInstance;
+
+
+
+
 
 };

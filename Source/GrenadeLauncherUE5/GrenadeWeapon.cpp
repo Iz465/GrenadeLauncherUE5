@@ -24,6 +24,7 @@ AGrenadeWeapon::AGrenadeWeapon()
 	PrimaryActorTick.bCanEverTick = false;
 	weaponInfo.reloadTime = 1;
 	weaponInfo.ammo = 5;
+	
 
 } 
 
@@ -49,7 +50,7 @@ void AGrenadeWeapon::StartFire()
 
 	if (!player) return;
 
-	FireAnimation();
+	//FireAnimation();
 
 	hasFiredRate = true;
 	GetWorldTimerManager().SetTimer(reloadTimerHandle, this, &AGrenadeWeapon::ResetFireRate, weaponInfo.fireRate, false);
@@ -57,6 +58,11 @@ void AGrenadeWeapon::StartFire()
 	AAmmo* ammo = GetWorld()->SpawnActor<AAmmo>(AmmoType, aimArea->GetComponentLocation(), player->GetControlRotation());
 	ammo->projectileMovement->Velocity = player->GetControlRotation().Vector() * 2000.f;
 	weaponInfo.ammo -= 1;
+
+	ammo->weapon = this;
+
+	
+
 
 	StartShake();
 
@@ -84,4 +90,6 @@ void AGrenadeWeapon::Reload()
 	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Black, TEXT("Reloading grenade launcher"));
 	hasReloaded = true;
 	hasFiredRate = false;
+
 }
+
