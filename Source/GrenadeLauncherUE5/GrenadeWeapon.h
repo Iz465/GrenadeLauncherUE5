@@ -40,14 +40,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-
-
-	void StartFire() override;
-	void StopFire() override;
-	void Reload() override;
-	
-
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool charging = false;
 

@@ -12,6 +12,7 @@
 #include "FPS_GameInstance.h"
 #include "Animation/AnimMontage.h"
 #include "Camera/CameraComponent.h"   
+#include "NiagaraFunctionLibrary.h"
 
 // Sets default values
 AWeapons::AWeapons()
@@ -31,6 +32,9 @@ AWeapons::AWeapons()
 
 	aimArea = CreateDefaultSubobject<UBoxComponent>(TEXT("Aim Area"));
 	aimArea->SetupAttachment(weaponMesh);
+
+	weaponFlashArea = CreateDefaultSubobject<UBoxComponent>(TEXT("Weapon Flash Area"));
+	weaponFlashArea->SetupAttachment(weaponMesh);
 
 }
 
@@ -70,11 +74,46 @@ void AWeapons::Tick(float DeltaTime)
 void AWeapons::StartFire()
 {
 
-	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Emerald, TEXT("Weapon Fired"));
+	if (hasFiredRate) return;
+
+	if (!hasReloaded) return;
 
 	if (!player) return;
+
+	if (weaponAnimationMontage)
+		player->GetMesh1P()->GetAnimInstance()->Montage_Play(weaponAnimationMontage, 1);
+	if (weaponFlash)
+		UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), weaponFlash, weaponFlashArea->GetComponentLocation());
+
+
+	hasFiredRate = true;
+	GetWorldTimerManager().SetTimer(reloadTimerHandle, this, &AWeapons::ResetFireRate, weaponInfo.fireRate, false);
+
+	if (AmmoType)
+	{
+		AAmmo* ammo = GetWorld()->SpawnActor<AAmmo>(AmmoType, aimArea->GetComponentLocation(), player->GetControlRotation());
+		ammo->projectileMovement->Velocity = player->GetControlRotation().Vector() * 2000.f;
+		weaponInfo.ammo -= 1;
+
+		ammo->weapon = this;
+	}
 	
-	player->GetMesh1P()->GetAnimInstance()->Montage_Play(weaponAnimationMontage, 1);
+
+
+
+
+	StartShake();
+
+	if ((weaponInfo.ammo) == 0)
+	{
+		hasReloaded = false;
+
+		//GetWorldTimerManager().SetTimer(reloadTimerHandle, this, &AGrenadeWeapon::Reload, 3, false);
+		ReloadAnimation();
+
+
+	}
+
 }
 
 void AWeapons::StopFire()
@@ -89,6 +128,7 @@ void AWeapons::Reload()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Emerald, TEXT("Reloading The Weapon"));
 	hasReloaded = true;
+	hasFiredRate = false;
 }
 
 void AWeapons::ResetFireRate()

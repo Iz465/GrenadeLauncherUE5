@@ -6,6 +6,10 @@
 #include "Components/ActorComponent.h"
 #include "LifeComponent.generated.h"
 
+
+
+
+
 // this script is for all actors that take damage e.g player, enemies.
 USTRUCT(BlueprintType)
 struct FLifeStruct

@@ -15,6 +15,7 @@ class UCameraShakeBase;
 class AGrenadeLauncherUE5Character;
 class UAnimMontage;
 class UFPS_GameInstance;
+class UNiagaraSystem;
 
 USTRUCT(BlueprintType)
 struct FWeaponInfo 
@@ -74,6 +75,8 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	UBoxComponent* aimArea;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	UBoxComponent* weaponFlashArea;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	UStaticMeshComponent* weaponMesh;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
@@ -115,6 +118,10 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UFPS_GameInstance* gameInstance;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	//TSubclassOf<UNiagaraSystem> weaponFlash;
+	UNiagaraSystem* weaponFlash;
 
 
 

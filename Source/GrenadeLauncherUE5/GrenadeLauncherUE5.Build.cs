@@ -17,7 +17,8 @@ public class GrenadeLauncherUE5 : ModuleRules
 		"EnhancedInput", 
 		"NavigationSystem", 
 		"AIModule",
-		"GameplayTags"
+		"GameplayTags",
+		"Niagara"
 		});
 	}
 }

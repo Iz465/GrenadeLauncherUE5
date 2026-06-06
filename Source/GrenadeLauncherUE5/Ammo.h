@@ -10,6 +10,7 @@ class UStaticMeshComponent;
 class UProjectileMovementComponent;
 class USphereComponent;
 class AWeapons;
+class UNiagaraSystem;
 
 UCLASS()
 class GRENADELAUNCHERUE5_API AAmmo : public AActor
@@ -44,6 +45,12 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	AWeapons* weapon;
+
+	virtual void NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComponent* OtherComp, bool bSelfMoved, 
+		FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit) override;
+
+	UPROPERTY(EditAnywhere, BLueprintReadWrite)
+	UNiagaraSystem* hitParticle;
 
 
 };
