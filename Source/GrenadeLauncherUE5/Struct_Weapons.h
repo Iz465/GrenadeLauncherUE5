@@ -9,6 +9,7 @@
 
 
 class UTexture2D;
+class UAnimSequence;
 
 USTRUCT(BlueprintType)
 struct FSavedWeaponInfo : public FTableRowBase
@@ -22,7 +23,7 @@ struct FSavedWeaponInfo : public FTableRowBase
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int ammo;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float reloadTime;
+	float reloadSpeedRate;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float fireRate;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

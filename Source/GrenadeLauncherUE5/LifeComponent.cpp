@@ -4,6 +4,8 @@
 #include "LifeComponent.h"
 #include "Kismet/GameplayStatics.h"
 
+
+
 // Sets default values for this component's properties
 ULifeComponent::ULifeComponent()
 {
@@ -54,3 +56,5 @@ void ULifeComponent::Heal(float amount)
 	lifeStruct.health += amount;
 	lifeStruct.health = FMath::Clamp(lifeStruct.health, 0, originalLifeStruct.health);
 }
+
+

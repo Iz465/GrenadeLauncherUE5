@@ -5,6 +5,9 @@
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
+#include "NiagaraFunctionLibrary.h"
+#include "LifeInterface.h"
+
 
 // Sets default values
 AAmmo::AAmmo()
@@ -40,4 +43,20 @@ void AAmmo::Tick(float DeltaTime)
 	*/
 
 }
+
+void AAmmo::NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComponent* OtherComp, bool bSelfMoved,
+	FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit)
+{
+
+	GEngine->AddOnScreenDebugMessage(1, 5, FColor::Purple, TEXT("Ammo hit something"));
+	UNiagaraFunctionLibrary::SpawnSystemAtLocation(GetWorld(), hitParticle, HitLocation);
+
+	if (Other->Implements<ULifeInterface>() && weapon)
+		ILifeInterface::Execute_TakeDamage(Other, weapon->weaponInfo.damage, HitLocation);
+
+	
+	Destroy();
+	
+}
+
 

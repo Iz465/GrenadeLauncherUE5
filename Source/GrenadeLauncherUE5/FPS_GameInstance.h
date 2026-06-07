@@ -19,6 +19,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FSavedWeaponInfo savedWeaponInfo;
 
+	UFUNCTION(BlueprintCallable)
+	void SetOriginalWeaponValues();
+
 protected:
 
 	

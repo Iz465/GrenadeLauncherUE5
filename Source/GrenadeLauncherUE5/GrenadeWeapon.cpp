@@ -22,8 +22,7 @@ AGrenadeWeapon::AGrenadeWeapon()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-	weaponInfo.reloadTime = 1;
-	weaponInfo.ammo = 5;
+
 	
 
 } 
@@ -42,54 +41,5 @@ void AGrenadeWeapon::Tick(float DeltaTime)
 
 }
 
-void AGrenadeWeapon::StartFire()
-{
-	if (hasFiredRate) return;
 
-	if (!hasReloaded) return;
-
-	if (!player) return;
-
-	//FireAnimation();
-
-	hasFiredRate = true;
-	GetWorldTimerManager().SetTimer(reloadTimerHandle, this, &AGrenadeWeapon::ResetFireRate, weaponInfo.fireRate, false);
-
-	AAmmo* ammo = GetWorld()->SpawnActor<AAmmo>(AmmoType, aimArea->GetComponentLocation(), player->GetControlRotation());
-	ammo->projectileMovement->Velocity = player->GetControlRotation().Vector() * 2000.f;
-	weaponInfo.ammo -= 1;
-
-	ammo->weapon = this;
-
-	
-
-
-	StartShake();
-
-	if ((weaponInfo.ammo) == 0)		
-	{
-		hasReloaded = false;
-	
-		//GetWorldTimerManager().SetTimer(reloadTimerHandle, this, &AGrenadeWeapon::Reload, 3, false);
-		ReloadAnimation();
-	//	AnimInstance->Montage_Play(weaponAnimationMontage);
-	//	AnimInstance->Montage_JumpToSection(FName("Reload"), weaponAnimationMontage);
-		
-	}
-
-}
-
-	
-void AGrenadeWeapon::StopFire()
-{
-
-}
-
-void AGrenadeWeapon::Reload()
-{
-	GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Black, TEXT("Reloading grenade launcher"));
-	hasReloaded = true;
-	hasFiredRate = false;
-
-}
 

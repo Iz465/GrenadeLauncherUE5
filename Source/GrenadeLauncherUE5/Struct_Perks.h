@@ -65,6 +65,8 @@ struct FPerks : public FTableRowBase
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EPerkRarity Rarity;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bNumerical;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UTexture2D* icon;
 
 };
