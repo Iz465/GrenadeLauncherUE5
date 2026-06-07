@@ -107,14 +107,16 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FWeaponInfo weaponInfo;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FWeaponInfo originalWeaponInfo;
+	//UPROPERTY(BlueprintReadWrite)
+	static FWeaponInfo originalWeaponInfo;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Tags")
 	TArray<FGameplayTag> weaponTags;
 
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+	UFUNCTION(BlueprintCallable)
 	void ActivatePerk(FPerks fperks);
+
+	void ChangePerkValue(FPerks fperks);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	UFPS_GameInstance* gameInstance;

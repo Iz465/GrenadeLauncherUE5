@@ -56,7 +56,7 @@ void AAmmo::NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComp
 
 	
 	Destroy();
-
+	
 }
 
 

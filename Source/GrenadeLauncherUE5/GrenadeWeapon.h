@@ -7,21 +7,8 @@
 #include "Weapons.h"
 #include "GrenadeWeapon.generated.h"
 
-USTRUCT(BlueprintType)
-struct FGrenadeWeaponInfo 
-{
-	GENERATED_BODY()
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float height = 171;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float distance = 300;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float explosionRadius;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float knockBack;
 
-};
 
 UCLASS()
 class GRENADELAUNCHERUE5_API AGrenadeWeapon : public AWeapons
@@ -40,16 +27,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool charging = false;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FVector launchVelocity;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FGrenadeWeaponInfo grenadeWeaponInfo;
 
-	FGrenadeWeaponInfo originalWeaponInfo;
 
 	
 
