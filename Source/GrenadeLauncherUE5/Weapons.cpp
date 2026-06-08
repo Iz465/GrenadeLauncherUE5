@@ -185,10 +185,11 @@ void AWeapons::ChangePerkValue(FPerks fperks)
 	case EPerkName::freezeTime: break;
 	case EPerkName::poisonTime: break;
 	case EPerkName::burnTime: break;
+
 		
 	}
 
-
+	
 
 
 	
