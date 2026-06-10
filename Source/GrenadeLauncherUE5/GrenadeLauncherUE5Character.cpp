@@ -116,6 +116,7 @@ void AGrenadeLauncherUE5Character::SetupPlayerInputComponent(UInputComponent* Pl
 		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Completed, this, &AGrenadeLauncherUE5Character::StopFire);
 
 		EnhancedInputComponent->BindAction(ReloadAction, ETriggerEvent::Started, this, &AGrenadeLauncherUE5Character::Reload);
+		EnhancedInputComponent->BindAction(DashAction, ETriggerEvent::Started, this, &AGrenadeLauncherUE5Character::Dash);
 	}
 	else
 	{
@@ -127,7 +128,7 @@ void AGrenadeLauncherUE5Character::SetupPlayerInputComponent(UInputComponent* Pl
 void AGrenadeLauncherUE5Character::Move(const FInputActionValue& Value)
 {
 	// input is a Vector2D
-	FVector2D MovementVector = Value.Get<FVector2D>();
+	MovementVector = Value.Get<FVector2D>();
 
 	if (Controller != nullptr)
 	{
@@ -195,9 +196,21 @@ void AGrenadeLauncherUE5Character::Interact()
 }
 
 
-void AGrenadeLauncherUE5Character::StartFire() {	if (!weaponsComponent) return; weaponsComponent->StartFire(); }
+void AGrenadeLauncherUE5Character::StartFire() { if (!weaponsComponent) return; weaponsComponent->StartFire(); }
 void AGrenadeLauncherUE5Character::StopFire() { if (!weaponsComponent) return; weaponsComponent->StopFire(); }
 void AGrenadeLauncherUE5Character::Reload() { if (!weaponsComponent) return;  weaponsComponent->Reload(); }
 
+void AGrenadeLauncherUE5Character::Dash() 
+{ 
+	if (!bCanDash) return;
+	bCanDash = false;
+	FVector DashDirection = FVector(MovementVector.Y, MovementVector.X, 0.0f);
+	DashDirection = GetActorRotation().RotateVector(DashDirection);
+	LaunchCharacter(DashDirection * DashAmount, true, true);
+	GetWorldTimerManager().SetTimer(DashTimerHandle, this, &AGrenadeLauncherUE5Character::ResetDash, DashCooldown, false);
+	DashFlick();
+	
+}
 
-
+void AGrenadeLauncherUE5Character::ResetDash() { bCanDash = true; UE_LOG(LogTemp, Warning, TEXT("Dash has reset!"));
+}

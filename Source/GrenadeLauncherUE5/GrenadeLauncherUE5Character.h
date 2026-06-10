@@ -55,6 +55,9 @@ class AGrenadeLauncherUE5Character : public ACharacter
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* ReloadAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* DashAction;
 	
 public:
 	AGrenadeLauncherUE5Character();
@@ -112,12 +115,26 @@ public:
 	EPlayerState ePlayerState = EPlayerState::Idle;
 	
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float DashAmount;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float DashCooldown;
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void DashFlick();
 private:
 	void Interact();
 	void StartFire();
 	void StopFire();
 	void Reload();
+	void Dash();
+	void ResetDash();
+	
 	virtual void Tick(float DeltaTime) override;
+
+	FVector2D MovementVector;
+	bool bCanDash = true;
+	FTimerHandle DashTimerHandle;
 
 };
 

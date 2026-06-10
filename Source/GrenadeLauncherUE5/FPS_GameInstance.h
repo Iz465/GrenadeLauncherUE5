@@ -10,6 +10,9 @@
 /**
  * 
  */
+
+class UWorld;
+
 UCLASS()
 class GRENADELAUNCHERUE5_API UFPS_GameInstance : public UGameInstance
 {
@@ -18,6 +21,10 @@ class GRENADELAUNCHERUE5_API UFPS_GameInstance : public UGameInstance
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FSavedWeaponInfo savedWeaponInfo;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<FName> CastleLevels;
+	
 
 	UFUNCTION(BlueprintCallable)
 	void SetOriginalWeaponValues();
