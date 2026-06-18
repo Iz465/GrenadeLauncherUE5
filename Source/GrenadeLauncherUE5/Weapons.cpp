@@ -97,7 +97,7 @@ void AWeapons::StartFire()
 	if (AmmoType)
 	{
 		AAmmo* ammo = GetWorld()->SpawnActor<AAmmo>(AmmoType, aimArea->GetComponentLocation(), player->GetControlRotation());
-		ammo->projectileMovement->Velocity = player->GetControlRotation().Vector() * 2000.f;
+		ammo->projectileMovement->Velocity = player->GetControlRotation().Vector() * 10000.f;
 		weaponInfo.ammo -= 1;
 
 		ammo->weapon = this;

@@ -25,8 +25,6 @@ struct FWeaponInfo
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float damage;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float speed;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int ammo;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float reloadTime;
